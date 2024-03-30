@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Recommendations</title>
+</head>
+<body>
+    <h1>Top Movie Recommendations based on your history:</h1>
+    <ul>
+        {% for movie in recommendations.values %}
+            <li>{{ movie['title'] }} | Average Rating: {{ movie['rating'] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
