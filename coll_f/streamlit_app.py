@@ -32,19 +32,28 @@ def recommend_movies_by_genre(user_id, final_table, top_n=5):
     return recommended_movies
 
 # Load your dataframes (user_item_matrix, item_similarity_df, final_table)
+# Replace these placeholders with your actual data loading process
+user_item_matrix = pd.DataFrame()
+item_similarity_df = pd.DataFrame()
+final_table = pd.DataFrame()
 
 # Streamlit app code
 st.title("Movie Recommendation System")
 
 # Sidebar for user input
-user_id = st.sidebar.number_input("Enter User ID", min_value=1, max_value=user_item_matrix['userId'].max(), value=1)
+if not user_item_matrix.empty:
+    user_id = st.sidebar.number_input("Enter User ID", min_value=1, max_value=user_item_matrix['userId'].max(), value=1)
 
-# Generate recommendations based on collaborative filtering
-recommendations_cf = generate_recommendations(user_id, user_item_matrix, item_similarity_df)
-st.write("Collaborative Filtering Recommendations:")
-st.write(recommendations_cf)
+    # Generate recommendations based on collaborative filtering
+    recommendations_cf = generate_recommendations(user_id, user_item_matrix, item_similarity_df)
+    st.write("Collaborative Filtering Recommendations:")
+    st.write(recommendations_cf)
 
-# Generate recommendations based on genre preferences
-recommended_movies_genre = recommend_movies_by_genre(user_id, final_table)
-st.write("Genre-based Recommendations:")
-st.write(recommended_movies_genre[['title', 'genres']].head())
+    # Generate recommendations based on genre preferences
+    recommended_movies_genre = recommend_movies_by_genre(user_id, final_table)
+    st.write("Genre-based Recommendations:")
+    st.write(recommended_movies_genre[['title', 'genres']].head())
+else:
+    st.write("No data available. Please load your data first.")
+
+
